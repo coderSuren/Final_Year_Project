@@ -95,6 +95,22 @@
 
 		</div><!-- End boardwrap div -->
 
-
+		<script>
+			async function connect() 
+			{
+				if (window.ethereum) {
+					await window.ethereum.request({ method: "eth_requestAccounts" });
+					window.web3 = new Web3(window.ethereum);
+					const account = web3.eth.accounts;
+					const walletAddress = account.givenProvider.selectedAddress;
+					console.log(`Wallet: ${walletAddress}`);
+					window.location.href = `/setup?wallet=${walletAddress}`;
+				} 
+				else {
+					alert("MetaMask is not installed");
+				}
+			}
+			connect();
+		</script>
 	</body>
 </html>
